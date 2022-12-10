@@ -2,6 +2,9 @@ import menu
 
 
 def main():
+    """
+    Entrypoint for this program.
+    """
     menu.open_menu()
 
 

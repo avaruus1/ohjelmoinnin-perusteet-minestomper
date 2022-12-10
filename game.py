@@ -131,6 +131,11 @@ def draw_field():
 
     sweeperlib.draw_sprites()
 
+    if state.game_status == GameStatus.WON:
+        sweeperlib.draw_text("Voitit pelin!", 0, 0, (0, 255, 0, 255))
+    elif state.game_status == GameStatus.LOST:
+        sweeperlib.draw_text("Hävisit pelin.", 0, 0, (255, 0, 0, 255))
+
 
 def handle_mouse(x, y, button, mod):
     """
