@@ -18,10 +18,15 @@ def request_int(prompt: str, bounds_min=None, bounds_max=None) -> int:
         try:
             i = int(input(prompt))
 
-            if (bounds_min is None or bounds_min < i) and (bounds_max is None or bounds_max > i):
-                return i
+            if bounds_min is not None and bounds_min >= i:
+                print(f"Luvun tulee olla suurempi kuin {bounds_min}")
+                continue
 
-            print(f"Luvun tulee kuulua välille [{bounds_min}, {bounds_max}]")
+            if bounds_max is not None and bounds_max <= i:
+                print(f"Luvun tulee olla pienempi kuin {bounds_max}")
+                continue
+
+            return i
         except ValueError:
             print("Tuo ei ollut kokonaisluku, yritä uudelleen.")
 
@@ -80,7 +85,7 @@ def open_menu() -> None:
         print("Toiminnot: pelaa (p) | tilastot (s) | poistu (q)")
 
         try:
-            if MENU_OPTIONS[input("Valinta: ")]():
+            if MENU_OPTIONS[input("Valinta: ").lower()]():
                 break
         except KeyError:
             print("Virheellinen valinta")

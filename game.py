@@ -133,9 +133,9 @@ def draw_field():
     sweeperlib.draw_sprites()
 
     if state.game_status == GameStatus.WON:
-        sweeperlib.draw_text("Voitit pelin!", 0, 0, (0, 255, 0, 255))
+        sweeperlib.draw_text("Voitit pelin!", 0, 0, color=(0, 255, 0, 255), size=24)
     elif state.game_status == GameStatus.LOST:
-        sweeperlib.draw_text("Hävisit pelin.", 0, 0, (255, 0, 0, 255))
+        sweeperlib.draw_text("Hävisit pelin.", 0, 0, color=(255, 0, 0, 255), size=24)
 
 
 def handle_mouse(x, y, button, mod):
@@ -143,7 +143,11 @@ def handle_mouse(x, y, button, mod):
     This function is called when a mouse button is clicked inside the game window.
     Prints the position and clicked button of the mouse to the terminal.
     """
-    if state.game_status or not state.is_in_bounds(x // 40, y // 40):
+    if state.game_status:
+        sweeperlib.close()
+        return
+
+    if not state.is_in_bounds(x // 40, y // 40):
         return
 
     if button == sweeperlib.MOUSE_LEFT:
