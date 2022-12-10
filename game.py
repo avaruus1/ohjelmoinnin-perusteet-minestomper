@@ -109,8 +109,9 @@ def save_current() -> None:
     """
     Saves stats for current game.
     """
-    stats.add_statistic(state.begin_time, datetime.now(), state.opened, state.game_status == GameStatus.WON,
-                        state.width(), state.height(), state.mines)
+    stats.add_statistic(state.begin_time, datetime.now(), state.opened,
+                        state.game_status == GameStatus.WON, state.width(),
+                        state.height(), state.mines)
 
 
 def draw_field():

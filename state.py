@@ -9,11 +9,12 @@ from util import count_adjacent_mines
 
 class GameStatus(Enum):
     """
-    Possible statuses for the game. There is no "not running" status, because we can always assume that
-    the game is either running or has ended when the game window is open.
+    Possible statuses for the game. There is no "not running" status,
+    because we can always assume that the game is either running or
+    has ended when the game window is open.
     """
-    RUNNING = 1,
-    LOST = 2,
+    RUNNING = 1
+    LOST = 2
     WON = 3
 
     def __bool__(self):

@@ -9,14 +9,16 @@ DEFAULT_STATS_FILE = "stats.json"
 stats = []
 
 
-def add_statistic(begin_time: datetime, end_time: datetime, tiles_opened: int, win: bool, field_width: int,
+def add_statistic(begin_time: datetime, end_time: datetime,
+                  tiles_opened: int, win: bool, field_width: int,
                   field_height: int, mine_amount: int) -> None:
     """
     Save statistic & write everything to the default file.
 
     :param begin_time: The time this game began
     :param end_time: The times this game ended
-    :param tiles_opened: Tiles the player opened. Tiles opened by floodfill don't count. i.e. amount of turns.
+    :param tiles_opened: Tiles the player opened.
+        Tiles opened by floodfill don't count. i.e. amount of turns.
     :param win: Whether the game was a win.
     :param field_width: Width of the field.
     :param field_height: Height of the field.
@@ -46,10 +48,12 @@ def print_stats() -> None:
 
     format_str = "{:<28} | {:<12} | {:<8} | {:<8} | {:<16} | {:<8}"
 
-    print(format_str.format("Alkamisaika", "Kesto (min)", "Vuorot", "Voitto", "Kenttä (W x H)", "Miinojen lkm"))
+    print(format_str.format("Alkamisaika", "Kesto (min)", "Vuorot",
+                            "Voitto", "Kenttä (W x H)", "Miinojen lkm"))
 
     for stat in stats:
-        delta = (datetime.fromisoformat(stat["end_time"]) - datetime.fromisoformat(stat["begin_time"]))
+        delta = (datetime.fromisoformat(stat["end_time"]) -
+                 datetime.fromisoformat(stat["begin_time"]))
 
         print(format_str.format(
             stat["begin_time"],
@@ -67,7 +71,7 @@ def write(file_name: str) -> None:
 
     :param file_name: Path to the file.
     """
-    with open(file_name, "w") as file:
+    with open(file_name, "w", encoding="utf-8") as file:
         file.write(json.dumps(stats, indent=2))
 
 
@@ -78,7 +82,7 @@ def read(file_name: str) -> None:
     :param file_name: Path to the file
     """
     try:
-        with open(file_name) as file:
+        with open(file_name, encoding="utf-8") as file:
             data = json.load(file)
 
             stats.clear()
